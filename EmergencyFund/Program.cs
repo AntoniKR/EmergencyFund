@@ -1,4 +1,3 @@
-
 namespace EmergencyFund
 {
     public class Program
@@ -20,12 +19,11 @@ namespace EmergencyFund
             {
                 app.MapOpenApi();
             }
-
+            app.UseDefaultFiles();
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

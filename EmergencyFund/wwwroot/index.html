@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Подушка безопасности</title>
+</head>
+<body>
+    <h1>Подушка безопасности</h1>
+    <p id="status">Проверяю API…</p>
+    <script>
+    fetch('/api/health')
+      .then(response => response.json())
+      .then(data => document.getElementById('status').textContent = 'API: ' + data.status)
+      .catch(() => document.getElementById('status').textContent = 'API недоступен');
+    </script>
+</body>
+</html>
