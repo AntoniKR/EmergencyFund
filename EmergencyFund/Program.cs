@@ -1,3 +1,6 @@
+using EmergencyFund.Repositories;
+using EmergencyFund.Services;
+
 namespace EmergencyFund
 {
     public class Program
@@ -11,6 +14,8 @@ namespace EmergencyFund
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddScoped<IDepositService, DepositService>();
+            builder.Services.AddSingleton<IDepositRepository, InMemoryDepositRepository>();
 
             var app = builder.Build();
 
@@ -19,8 +24,8 @@ namespace EmergencyFund
             {
                 app.MapOpenApi();
             }
-            app.UseDefaultFiles();
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
