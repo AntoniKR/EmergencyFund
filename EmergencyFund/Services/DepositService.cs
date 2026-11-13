@@ -7,25 +7,35 @@ namespace EmergencyFund.Services
     public class DepositService : IDepositService
     {
         private readonly IDepositRepository _repository;
-
         public DepositService(IDepositRepository repository)
         {
             _repository = repository;
         }
-        private static DepositResponse ToResponse(Deposit deposit) => 
-            new(deposit.Id, deposit.Name, deposit.Type, deposit.Sum, deposit.InterestRate, deposit.StartDate, deposit.Term,deposit.Capitalization, deposit.EndDate, deposit.EstimatedSum);
 
-
-
-
-        public Task<DepositResponse> CreateAsync(CreateDepositRequest request)
+        public async Task<DepositResponse> CreateAsync(CreateDepositRequest request)
         {
-            throw new NotImplementedException();
+            var deposit = new Deposit
+            {
+                Name = request.Name,
+                Type = request.Type.Value,
+                Sum = request.Sum.Value,
+                InterestRate = request.InterestRate.Value,
+                StartDate = request.StartDate.Value,
+                Term = request.Term,
+                Capitalization = request.Capitalization.Value            
+            };
+
+            // Вычисляем конец даты вклада и ожидаемую сумму
+            deposit.EndDate = DepositCalculator.CalculateEndDate(deposit.StartDate, deposit.Term);
+            deposit.EstimatedSum = DepositCalculator.CalculateEstimatedSum(deposit.Sum, deposit.InterestRate, deposit.StartDate, deposit.Term, deposit.Capitalization);
+
+            var result = await _repository.AddAsync(deposit);
+            return ToResponse(result);
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _repository.DeleteAsync(id);         
         }
 
         public async Task<IReadOnlyList<DepositResponse>> GetAllAsync()
@@ -45,9 +55,22 @@ namespace EmergencyFund.Services
             return ToResponse(deposit);
         }
 
-        public Task<DepositResponse?> UpdateAsync(Guid id, UpdateDepositRequest request)
+        public async Task<DepositResponse?> UpdateAsync(Guid id, UpdateDepositRequest request)
         {
             throw new NotImplementedException();
         }
+
+        private static DepositResponse ToResponse(Deposit deposit) => new
+            (deposit.Id,
+            deposit.Name,
+            deposit.Type,
+            deposit.Sum,
+            deposit.InterestRate,
+            deposit.StartDate,
+            deposit.Term,
+            deposit.Capitalization,
+            deposit.EndDate,
+            deposit.EstimatedSum);
+
     }
 }

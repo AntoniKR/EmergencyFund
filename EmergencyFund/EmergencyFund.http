@@ -1,6 +1,33 @@
-@EmergencyFund_HostAddress = http://localhost:5120
+@EmergencyFund_HostAddress = https://localhost:7096
 
-GET {{EmergencyFund_HostAddress}}/weatherforecast/
-Accept: application/json
+
+
+###
+
+POST {{EmergencyFund_HostAddress}}/api/deposits
+Content-Type: application/json
+
+{
+  "name": "Депозитс на год1111",
+  "type": "deposit",
+  "sum": 150000,
+  "interestRate": 15,
+  "startDate": "2026-11-02",
+  "term": 12,
+  "capitalization": "monthly"
+}
+
+###
+
+GET {{EmergencyFund_HostAddress}}/api/deposits/57f960ab-c254-48fd-9154-72a1e283cab8
+
+###
+
+GET {{EmergencyFund_HostAddress}}/api/deposits/abc
+
+###
+
+
+DELETE {{EmergencyFund_HostAddress}}/api/deposits/57f960ab-c254-48fd-9154-72a1e283cab8
 
 ###
