@@ -15,13 +15,13 @@ namespace EmergencyFund.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetListDeposits()
+        public async Task<ActionResult<IReadOnlyList<DepositResponse>>> GetAll()
         {
             var result = await _depositService.GetAllAsync();
             return Ok(result);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDeposit(Guid id)
+        public async Task<ActionResult<DepositResponse>> GetById(Guid id)
         {
             var result = await _depositService.GetByIdAsync(id);
             if(result is null)
@@ -30,11 +30,11 @@ namespace EmergencyFund.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CreateDepositRequest request)
+        public async Task<ActionResult<DepositResponse>> Create(CreateDepositRequest request)
         {
             var deposit = await _depositService.CreateAsync(request);
 
-            return CreatedAtAction(nameof(GetDeposit), new { id  = deposit.Id }, deposit);
+            return CreatedAtAction(nameof(GetById), new { id  = deposit.Id }, deposit);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
