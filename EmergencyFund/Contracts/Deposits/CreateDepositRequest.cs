@@ -1,7 +1,7 @@
 ﻿using EmergencyFund.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace EmergencyFund.Contracts
+namespace EmergencyFund.Contracts.Deposits
 {
     public record CreateDepositRequest (
         string Name,

@@ -1,6 +1,6 @@
 ﻿using EmergencyFund.Models;
 
-namespace EmergencyFund.Repositories
+namespace EmergencyFund.Repositories.DepositRepository
 {
     public interface IDepositRepository
     {

@@ -1,7 +1,7 @@
 ﻿using EmergencyFund.Models;
 using System.Collections.Concurrent;
 
-namespace EmergencyFund.Repositories
+namespace EmergencyFund.Repositories.DepositRepository
 {
     public class InMemoryDepositRepository : IDepositRepository
     {

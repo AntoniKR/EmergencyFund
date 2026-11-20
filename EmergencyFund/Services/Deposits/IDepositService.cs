@@ -1,6 +1,6 @@
-﻿using EmergencyFund.Contracts;
+﻿using EmergencyFund.Contracts.Deposits;
 
-namespace EmergencyFund.Services
+namespace EmergencyFund.Services.Deposits
 {
     public interface IDepositService
     {

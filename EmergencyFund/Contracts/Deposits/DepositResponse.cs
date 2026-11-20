@@ -1,7 +1,7 @@
 ﻿using EmergencyFund.Models.Enums;
 
 
-namespace EmergencyFund.Contracts
+namespace EmergencyFund.Contracts.Deposits
 {
     public record DepositResponse(
     Guid Id,

@@ -1,5 +1,5 @@
-﻿using EmergencyFund.Contracts;
-using EmergencyFund.Services;
+﻿using EmergencyFund.Contracts.Deposits;
+using EmergencyFund.Services.Deposits;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmergencyFund.Controllers

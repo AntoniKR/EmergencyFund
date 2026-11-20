@@ -1,5 +1,8 @@
 using EmergencyFund.Repositories;
-using EmergencyFund.Services;
+using EmergencyFund.Repositories.DepositRepository;
+using EmergencyFund.Repositories.GoalRepository;
+using EmergencyFund.Services.Deposits;
+using EmergencyFund.Services.Goals;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -30,6 +33,8 @@ namespace EmergencyFund
             builder.Services.AddOpenApi();
             builder.Services.AddScoped<IDepositService, DepositService>();
             builder.Services.AddSingleton<IDepositRepository, InMemoryDepositRepository>();
+            builder.Services.AddScoped<IGoalService, GoalService>();
+            builder.Services.AddSingleton<IGoalRepository, InMemoryGoalRepository>();
 
             var app = builder.Build();
 

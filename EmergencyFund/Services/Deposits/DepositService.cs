@@ -1,8 +1,8 @@
-﻿using EmergencyFund.Contracts;
+﻿using EmergencyFund.Contracts.Deposits;
 using EmergencyFund.Models;
-using EmergencyFund.Repositories;
+using EmergencyFund.Repositories.DepositRepository;
 
-namespace EmergencyFund.Services
+namespace EmergencyFund.Services.Deposits
 {
     public class DepositService : IDepositService
     {

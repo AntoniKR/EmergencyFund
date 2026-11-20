@@ -1,7 +1,7 @@
 ﻿using EmergencyFund.Models.Enums;
 
 
-namespace EmergencyFund.Services
+namespace EmergencyFund.Services.Deposits
 {
     public static class DepositCalculator
     {

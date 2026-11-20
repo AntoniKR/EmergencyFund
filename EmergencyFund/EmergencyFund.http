@@ -1,7 +1,5 @@
 @EmergencyFund_HostAddress = https://localhost:7096
 
-
-
 ###
 
 POST {{EmergencyFund_HostAddress}}/api/deposits
@@ -19,15 +17,49 @@ Content-Type: application/json
 
 ###
 
+POST {{EmergencyFund_HostAddress}}/api/deposits
+Content-Type: application/json
+
+{
+  "name": "Депозитс на год",
+  "type": "deposit",
+  "sum": 100000,
+  "interestRate": 15,
+  "startDate": "2026-11-03",
+  "term": 12,
+  "capitalization": "monthly"
+}
+
+###
+
 GET {{EmergencyFund_HostAddress}}/api/deposits/57f960ab-c254-48fd-9154-72a1e283cab8
 
 ###
 
-GET {{EmergencyFund_HostAddress}}/api/deposits/abc
+GET {{EmergencyFund_HostAddress}}/api/deposits/
 
 ###
 
 
 DELETE {{EmergencyFund_HostAddress}}/api/deposits/57f960ab-c254-48fd-9154-72a1e283cab8
+
+###
+
+GET {{EmergencyFund_HostAddress}}/api/goal
+
+###
+
+PUT {{EmergencyFund_HostAddress}}/api/goal
+Content-Type: application/json
+
+{
+  "monthlyExpenses": 50000,
+  "months": 6,
+  "monthlySavings": 10000
+}
+
+###
+
+DELETE {{EmergencyFund_HostAddress}}/api/goal
 
 ###

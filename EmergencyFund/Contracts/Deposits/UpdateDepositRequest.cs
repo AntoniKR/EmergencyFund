@@ -1,5 +1,4 @@
-﻿
-namespace EmergencyFund.Contracts
+﻿namespace EmergencyFund.Contracts.Deposits
 {
     public record UpdateDepositRequest(
         string? Name,

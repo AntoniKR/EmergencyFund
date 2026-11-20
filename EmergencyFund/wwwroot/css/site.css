@@ -1,0 +1,280 @@
+:root {
+  color-scheme: light;
+  --paper: #edf1ec;
+  --surface: #f8faf7;
+  --ink: #1d2b27;
+  --muted: #5b6a64;
+  --rule: #c8d1cb;
+  --stamp: #5a3d9a;
+  --danger: #a3333d;
+  --focus: #2f6fd1;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #131a17;
+    --surface: #1a221f;
+    --ink: #e2e9e5;
+    --muted: #9aa7a1;
+    --rule: #2d3834;
+    --stamp: #b9a5f2;
+    --danger: #e8838b;
+    --focus: #7aa7ff;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.5 var(--sans);
+}
+
+.page {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.375rem;
+  margin: 2.5rem 0 1rem;
+}
+
+/* Переключатель страниц */
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0 0 1.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.4rem 0;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+
+/* Итог: строка остатка, как в сберегательной книжке */
+.balance {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--ink);
+}
+.balance-label { color: var(--muted); }
+.balance-value {
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.balance-note {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+/* Список вкладов */
+.message {
+  min-height: 1.5em;
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+}
+.ledger { border-top: 1px solid var(--rule); }
+.empty {
+  margin: 0;
+  padding: 1.5rem 0;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+}
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.entry-name {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.entry-kind {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+}
+.figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+}
+.entry .figures { grid-column: 1 / -1; }
+.figures dt {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.figures dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Прогноз к концу срока — «штамп» фиолетовыми банковскими чернилами */
+.stamp {
+  display: inline-block;
+  color: var(--stamp);
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+  padding: 0.05em 0.45em;
+  font-weight: 600;
+  transform: rotate(-1.5deg);
+}
+
+.button-danger {
+  align-self: start;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--danger);
+  font: inherit;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+.button-danger:hover { border-color: var(--danger); }
+
+/* Цель */
+.goal-summary { margin: 0 0 1.5rem; }
+.goal-line {
+  margin: 0 0 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.goal-percent {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.meter {
+  height: 0.75rem;
+  background: var(--rule);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0.5rem 0 1rem;
+}
+.meter-fill {
+  height: 100%;
+  background: var(--stamp);
+}
+.goal-empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Формы */
+.form {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+.form-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.field-wide { grid-column: 1 / -1; }
+.field label { font-weight: 600; }
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+input, select {
+  width: 100%;
+  min-height: 2.5rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+}
+input:focus-visible, select:focus-visible, button:focus-visible, .nav a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.form-errors {
+  grid-column: 1 / -1;
+  color: var(--danger);
+  border-left: 3px solid var(--danger);
+  padding: 0.25rem 0 0.25rem 0.75rem;
+}
+.form-errors ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+.submit {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 6px;
+  padding: 0.65rem 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.footer {
+  margin-top: 3rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 40rem) {
+  .form, .form-three { grid-template-columns: 1fr; }
+  .entry { grid-template-columns: 1fr; }
+  .button-danger { justify-self: start; }
+}
