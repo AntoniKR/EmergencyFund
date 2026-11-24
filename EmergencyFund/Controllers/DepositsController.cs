@@ -1,4 +1,5 @@
 ﻿using EmergencyFund.Contracts.Deposits;
+using EmergencyFund.Models.Enums;
 using EmergencyFund.Services.Deposits;
 using Microsoft.AspNetCore.Mvc;
 
