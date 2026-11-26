@@ -1,3 +1,5 @@
+using EmergencyFund.ExceptionHandler;
+using EmergencyFund.Options;
 using EmergencyFund.Repositories;
 using EmergencyFund.Repositories.DepositRepository;
 using EmergencyFund.Repositories.GoalRepository;
@@ -36,7 +38,18 @@ namespace EmergencyFund
             builder.Services.AddScoped<IGoalService, GoalService>();
             builder.Services.AddSingleton<IGoalRepository, InMemoryGoalRepository>();
 
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+            builder.Services.AddProblemDetails();
+            builder.Logging.AddSimpleConsole(options => options.IncludeScopes = true);
+
+            builder.Services.AddOptions<DepositCalculationOptions>()
+                .BindConfiguration(DepositCalculationOptions.SectionName)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
             var app = builder.Build();
+            Console.WriteLine($"DaysInYear = {app.Configuration["DepositCalculation:DaysInYear"]}");
+            app.UseExceptionHandler();  // Для обработки всяких ошибок с помощью класса GlobalExceptionHandler
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

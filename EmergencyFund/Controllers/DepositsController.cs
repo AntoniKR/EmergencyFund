@@ -43,5 +43,15 @@ namespace EmergencyFund.Controllers
             bool result = await _depositService.DeleteAsync(id);
             return result ? NoContent() : NotFound();
         }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<DepositResponse>> Update(Guid id, UpdateDepositRequest request)
+        {
+            var result = await _depositService.UpdateAsync(id, request);
+            if(result is null)
+                return NotFound(result);
+            return result;
+        }
+
     }
 }

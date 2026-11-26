@@ -1,4 +1,5 @@
 ﻿using EmergencyFund.Models.Enums;
+using EmergencyFund.Options;
 
 
 namespace EmergencyFund.Services.Deposits
@@ -18,7 +19,7 @@ namespace EmergencyFund.Services.Deposits
         }
 
 
-        public static decimal? CalculateEstimatedSum(decimal sum, decimal interestRate, DateOnly startDate, int? termMonths, Capitalization capitalization)
+        public static decimal? CalculateEstimatedSum(decimal sum, decimal interestRate, DateOnly startDate, int? termMonths, Capitalization capitalization, int daysInYear)
         {
             if (termMonths is null)
             {
@@ -26,7 +27,7 @@ namespace EmergencyFund.Services.Deposits
             }
 
             decimal annualRate = interestRate / 100;
-            decimal dailyRate = annualRate / 365;
+            decimal dailyRate = annualRate / daysInYear;
             decimal estimatedSum = sum;
 
             switch (capitalization)
@@ -49,7 +50,7 @@ namespace EmergencyFund.Services.Deposits
                     }
                 case Capitalization.Weekly:
                     {
-                        decimal weeklyRate = annualRate * 7 / 365;
+                        decimal weeklyRate = annualRate * 7 / daysInYear;
 
                         DateOnly endDate = CalculateEndDate(startDate, termMonths).Value;
                         int countDays = (endDate.DayNumber - startDate.DayNumber);

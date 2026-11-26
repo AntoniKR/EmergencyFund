@@ -15,7 +15,7 @@ namespace EmergencyFund.Contracts.Deposits
             int? Term,
             [Required] Capitalization? Capitalization
             ) : IValidatableObject
-    {
+    {        
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Type == DepositType.Deposit)

@@ -7,17 +7,17 @@ Content-Type: application/json
 
 {
   "name": "asdf",
-  "sum": 0,
+  "sum": 150000,
   "type": "deposit",
-  "interestRate": 150,
+  "interestRate": 15,
   "startDate": "2026-11-02",
-  "term": null,
+  "term": 12,
   "capitalization": "monthly"
 }
 
 ###
 
-GET {{EmergencyFund_HostAddress}}/api/deposits/57f960ab-c254-48fd-9154-72a1e283cab8
+GET {{EmergencyFund_HostAddress}}/api/deposits/2a2d2863-eaf9-4b1a-b0fa-09df7e825fd5
 
 ###
 
@@ -45,3 +45,11 @@ Content-Type: application/json
 
 ###
 
+PATCH {{EmergencyFund_HostAddress}}/api/deposits/dbe52e54-c6f2-459d-9d00-b4427790b5fc
+Content-Type: application/json
+
+{
+  "sum": 350000
+}
+
+###
